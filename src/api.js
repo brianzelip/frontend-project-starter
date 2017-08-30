@@ -12,8 +12,8 @@ function api(url, options) {
   })
 }
 
-export function getAllPeople() {
-  return api('people/', {
+export function getAllPeople(nextPageParam) {
+  return api(`people/${nextPageParam ? `?page=${nextPageParam}` : ''}`, {
     method: 'GET',
   })
 }

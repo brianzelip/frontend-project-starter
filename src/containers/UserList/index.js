@@ -1,15 +1,15 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchUsers, fetchUsersSuccess, fetchUsersFailure } from '../../data/users/actions'
+import { fetchUsers, fetchMoreUsers } from '../../data/users/actions'
 import {
   selectError,
   selectUsers,
   selectLoading,
   selectLoaded,
-} from '../../data/users/selectors.js'
-import dummyData from './dummyData'
-import * as API from '../../api'
+  selectNextPage,
+  selectIsLoadingMore,
+} from '../../data/users/selectors'
 
 class UserList extends PureComponent {
   componentWillMount() {
@@ -18,11 +18,14 @@ class UserList extends PureComponent {
     }
 
     this.props.fetchUsers()
-    // API.getAllPeople().then(result => this.props.fetchUsersSuccess(result.results))
+  }
+
+  handleLoadMore = () => {
+    this.props.fetchMoreUsers()
   }
 
   render() {
-    const { users, loading, error } = this.props
+    const { users, loading, error, nextPage, isLoadingMore } = this.props
     if (error) {
       return <div>{error}</div>
     }
@@ -31,17 +34,27 @@ class UserList extends PureComponent {
       return <div>loading</div>
     }
 
-    return <ul>{users.map(user => <li key={user.id}>{user.name}</li>)}</ul>
+    return (
+      <div>
+        <ul>{users.map((user, index) => <li key={index}>{user.name}</li>)}</ul>
+        {nextPage && (
+          <button disabled={isLoadingMore} onClick={this.handleLoadMore}>
+            {isLoadingMore ? 'Loading...' : 'Load more'}
+          </button>
+        )}
+      </div>
+    )
   }
 }
 
 UserList.propTypes = {
-  error: PropTypes.string,
+  error: PropTypes.string.isRequired,
+  fetchMoreUsers: PropTypes.func.isRequired,
   fetchUsers: PropTypes.func.isRequired,
-  fetchUsersFailure: PropTypes.func.isRequired,
-  fetchUsersSuccess: PropTypes.func.isRequired,
+  isLoadingMore: PropTypes.bool.isRequired,
   loaded: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
+  nextPage: PropTypes.string.isRequired,
   users: PropTypes.array.isRequired,
 }
 
@@ -50,12 +63,13 @@ const mapStateToProps = state => ({
   users: selectUsers(state),
   loading: selectLoading(state),
   loaded: selectLoaded(state),
+  nextPage: selectNextPage(state),
+  isLoadingMore: selectIsLoadingMore(state),
 })
 
 const mapDispatchToProps = {
   fetchUsers,
-  fetchUsersSuccess,
-  fetchUsersFailure,
+  fetchMoreUsers,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList)
