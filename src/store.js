@@ -1,5 +1,4 @@
 import { compose, createStore, combineReducers, applyMiddleware } from 'redux'
-import { persistStore, autoRehydrate } from 'redux-persist'
 import todoReducer from './data/todo/reducer'
 import userReducer from './data/users/reducer'
 import createSagaMiddleware from 'redux-saga'

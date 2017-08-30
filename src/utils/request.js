@@ -1,7 +1,6 @@
 import 'whatwg-fetch'
 
 function parse(response) {
-  console.log(response)
   return response.json()
 }
 
