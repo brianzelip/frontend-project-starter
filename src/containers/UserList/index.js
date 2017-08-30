@@ -17,7 +17,8 @@ class UserList extends PureComponent {
       return
     }
 
-    API.getAllPeople().then(result => this.props.fetchUsersSuccess(result.results))
+    this.props.fetchUsers()
+    // API.getAllPeople().then(result => this.props.fetchUsersSuccess(result.results))
   }
 
   render() {
