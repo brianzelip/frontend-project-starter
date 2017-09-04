@@ -30,6 +30,14 @@ module.exports = options => ({
           },
         ],
       },
+      {
+        test: /\.s?css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader'],
+          disable: process.env.NODE_ENV === 'development',
+        }),
+      },
     ],
   },
   plugins: options.plugins.concat([
