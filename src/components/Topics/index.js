@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link, Route, Prompt } from 'react-router-dom'
 import Helmet from 'react-helmet'
 
@@ -27,19 +26,9 @@ const Topics = props => {
       </ul>
 
       <Route path={`${match.url}/:topicId`} component={Topic} />
-      <Route
-        exact
-        path={match.url}
-        render={() => <h3>Please select a topic.</h3>}
-      />
+      <Route exact path={match.url} render={() => <h3>Please select a topic.</h3>} />
     </div>
   )
-}
-
-Topics.propTypes = {
-  match: PropTypes.shape({
-    url: PropTypes.string.isRequired, // eslint-disable-line
-  }).isRequired,
 }
 
 export default Topics

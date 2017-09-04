@@ -13,18 +13,17 @@ const navItems = [
   { title: 'Topics', to: '/topics' },
 ]
 
-const Nav = () => (
+const Nav = () =>
   <nav>
     <ul>
-      {navItems.map((item, index) => (
+      {navItems.map((item, index) =>
         <li key={index}>
           <NavLink to={item.to} activeStyle={activeStyle}>
             {item.title}
           </NavLink>
         </li>
-      ))}
+      )}
     </ul>
   </nav>
-)
 
 export default Nav
