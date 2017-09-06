@@ -22,14 +22,28 @@ class Form extends Component {
   handleChange = event => {
     this.setState({
       [event.target.name]: {
-        ...this.state[event.target.name],
+        error: this.state.isFormSubmitted
+          ? this.validateField(event.target)
+          : this.state[event.target.name].error,
         value: event.target.value,
       },
     })
   }
 
+  validateField({ name, value }) {
+    if (name === 'email') {
+      return !validateEmail(value)
+    }
+
+    return Boolean(!value)
+  }
+
   handleSubmit = event => {
     event.preventDefault()
+
+    this.setState({
+      isFormSubmitted: true,
+    })
 
     const isEmailValid = validateEmail(this.state.email.value)
 
@@ -50,7 +64,7 @@ class Form extends Component {
     } else {
       // provolat API
 
-      console.log(this.state)
+      this.props.signIn(this.state.email.value, this.state.password.value)
     }
   }
 
@@ -67,7 +81,7 @@ class Form extends Component {
             placeholder="email"
             value={email.value}
           />
-          {email.error && <div>Email is invalid</div>}
+          {email.error && <div>{email.error}</div>}
         </div>
         <div>
           <input
@@ -91,6 +105,7 @@ Form.defaultProps = {
 
 Form.propTypes = {
   email: PropTypes.string,
+  signIn: PropTypes.func.isRequired,
 }
 
 export default Form

@@ -9,7 +9,7 @@ const App = () => (
     <div>
       <Helmet titleTemplate="%s | Frontend Starter Project" />{' '}
       <h1>Frontend Starter Project - React</h1>
-      <Form />
+      <Form signIn={(email, password) => console.log(email, password)} />
     </div>
   </BrowserRouter>
 )

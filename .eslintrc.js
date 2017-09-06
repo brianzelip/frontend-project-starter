@@ -9,6 +9,7 @@ module.exports = {
     '@strv/javascript/environments/react/optional',
     '@strv/javascript/coding-styles/recommended',
   ],
+  parser: 'babel-eslint',
   rules: {
     'react/jsx-wrap-multilines': [
       'error',
