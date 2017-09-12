@@ -2,11 +2,11 @@ import React from 'react'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import Helmet from 'react-helmet'
 
-import Home from '../Home'
-import About from '../About'
-import Topics from '../Topics'
-import NotFound from '../NotFound'
-import Nav from '../Nav'
+import Home from 'components/Home'
+import About from 'components/About'
+import Topics from 'components/Topics'
+import NotFound from 'components/NotFound'
+import Nav from 'components/Nav'
 
 const RouterExample = () => (
   <div>

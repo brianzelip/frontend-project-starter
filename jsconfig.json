@@ -1,0 +1,10 @@
+{
+  // This file is needed for VSCode + webpack resolve & path intellisense funcionality
+  "compilerOptions": {
+    "baseUrl": ".",
+    // Relative to "baseUrl"
+    "paths": {
+      "*": ["src/*"]
+    }
+  }
+}

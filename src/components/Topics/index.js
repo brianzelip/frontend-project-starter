@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link, Route, Prompt } from 'react-router-dom'
 import Helmet from 'react-helmet'
 
-import H1 from '../H1'
+import H1 from 'components/H1'
 import Topic from './Topic'
 
 const Topics = props => {

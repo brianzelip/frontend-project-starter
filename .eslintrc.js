@@ -20,4 +20,11 @@ module.exports = {
       },
     ],
   },
+  settings: {
+    'import/resolver': {
+      webpack: {
+        config: 'internals/webpack/config.dev.js',
+      },
+    },
+  },
 }
